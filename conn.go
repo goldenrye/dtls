@@ -321,6 +321,43 @@ func (c *Conn) Read(p []byte) (n int, err error) {
 	}
 }
 
+func (c *Conn) ReadFrom(r Reader) (int, error) {
+	if c.isConnectionClosed() {
+		return 0, ErrConnClosed
+	}
+
+	select {
+	case <-c.writeDeadline.Done():
+		return 0, errDeadlineExceeded
+	default:
+	}
+
+	if !c.isHandshakeCompletedSuccessfully() {
+		return 0, errHandshakeInProgress
+	}
+
+    p []byte;
+    m, e := r.Read(p);
+    if m < 0 {
+        panic(errNegativeRead)
+    }
+	return len(p), c.writePackets(c.writeDeadline, []*packet{
+		{
+			record: &recordlayer.RecordLayer{
+				Header: recordlayer.Header{
+					Epoch:   c.state.getLocalEpoch(),
+					Version: protocol.Version1_2,
+				},
+				Content: &protocol.ApplicationData{
+					Data: p,
+				},
+			},
+			shouldEncrypt: true,
+		},
+	})
+
+}
+
 // Write writes len(p) bytes from p to the DTLS connection
 func (c *Conn) Write(p []byte) (int, error) {
 	if c.isConnectionClosed() {
