@@ -6,8 +6,8 @@ import (
 	"encoding/pem"
 	"testing"
 
-	"github.com/pion/dtls/v2/pkg/crypto/elliptic"
-	"github.com/pion/dtls/v2/pkg/crypto/hash"
+	"github.com/goldenrye/dtls/pkg/crypto/elliptic"
+	"github.com/goldenrye/dtls/pkg/crypto/hash"
 )
 
 const rawPrivateKey = `

@@ -8,10 +8,10 @@ import ( //nolint:gci
 	"encoding/binary"
 	"hash"
 
-	"github.com/pion/dtls/v2/internal/util"
-	"github.com/pion/dtls/v2/pkg/crypto/prf"
-	"github.com/pion/dtls/v2/pkg/protocol"
-	"github.com/pion/dtls/v2/pkg/protocol/recordlayer"
+	"github.com/goldenrye/dtls/internal/util"
+	"github.com/goldenrye/dtls/pkg/crypto/prf"
+	"github.com/goldenrye/dtls/pkg/protocol"
+	"github.com/goldenrye/dtls/pkg/protocol/recordlayer"
 )
 
 // block ciphers using cipher block chaining.

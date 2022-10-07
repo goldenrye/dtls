@@ -3,10 +3,10 @@ package handshake
 import (
 	"encoding/binary"
 
-	"github.com/pion/dtls/v2/internal/ciphersuite/types"
-	"github.com/pion/dtls/v2/pkg/crypto/elliptic"
-	"github.com/pion/dtls/v2/pkg/crypto/hash"
-	"github.com/pion/dtls/v2/pkg/crypto/signature"
+	"github.com/goldenrye/dtls/internal/ciphersuite/types"
+	"github.com/goldenrye/dtls/pkg/crypto/elliptic"
+	"github.com/goldenrye/dtls/pkg/crypto/hash"
+	"github.com/goldenrye/dtls/pkg/crypto/signature"
 )
 
 // MessageServerKeyExchange supports ECDH and PSK

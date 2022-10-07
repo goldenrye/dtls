@@ -5,9 +5,9 @@ import (
 	"encoding/gob"
 	"sync/atomic"
 
-	"github.com/pion/dtls/v2/pkg/crypto/elliptic"
-	"github.com/pion/dtls/v2/pkg/crypto/prf"
-	"github.com/pion/dtls/v2/pkg/protocol/handshake"
+	"github.com/goldenrye/dtls/pkg/crypto/elliptic"
+	"github.com/goldenrye/dtls/pkg/crypto/prf"
+	"github.com/goldenrye/dtls/pkg/protocol/handshake"
 	"github.com/pion/transport/replaydetector"
 )
 

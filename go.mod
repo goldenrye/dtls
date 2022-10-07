@@ -1,4 +1,4 @@
-module github.com/pion/dtls/v2
+module github.com/goldenrye/dtls
 
 go 1.19
 

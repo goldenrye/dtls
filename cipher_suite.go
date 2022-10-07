@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"hash"
 
-	"github.com/pion/dtls/v2/internal/ciphersuite"
-	"github.com/pion/dtls/v2/pkg/crypto/clientcertificate"
-	"github.com/pion/dtls/v2/pkg/protocol/recordlayer"
+	"github.com/goldenrye/dtls/internal/ciphersuite"
+	"github.com/goldenrye/dtls/pkg/crypto/clientcertificate"
+	"github.com/goldenrye/dtls/pkg/protocol/recordlayer"
 )
 
 // CipherSuiteID is an ID for our supported CipherSuites

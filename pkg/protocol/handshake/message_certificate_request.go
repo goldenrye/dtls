@@ -3,10 +3,10 @@ package handshake
 import (
 	"encoding/binary"
 
-	"github.com/pion/dtls/v2/pkg/crypto/clientcertificate"
-	"github.com/pion/dtls/v2/pkg/crypto/hash"
-	"github.com/pion/dtls/v2/pkg/crypto/signature"
-	"github.com/pion/dtls/v2/pkg/crypto/signaturehash"
+	"github.com/goldenrye/dtls/pkg/crypto/clientcertificate"
+	"github.com/goldenrye/dtls/pkg/crypto/hash"
+	"github.com/goldenrye/dtls/pkg/crypto/signature"
+	"github.com/goldenrye/dtls/pkg/crypto/signaturehash"
 )
 
 /*

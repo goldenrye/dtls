@@ -4,7 +4,7 @@ package recordlayer
 import (
 	"errors"
 
-	"github.com/pion/dtls/v2/pkg/protocol"
+	"github.com/goldenrye/dtls/pkg/protocol"
 )
 
 var (

@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/dtls/v2/pkg/crypto/elliptic"
-	"github.com/pion/dtls/v2/pkg/crypto/signaturehash"
-	"github.com/pion/dtls/v2/pkg/protocol/alert"
-	"github.com/pion/dtls/v2/pkg/protocol/handshake"
+	"github.com/goldenrye/dtls/pkg/crypto/elliptic"
+	"github.com/goldenrye/dtls/pkg/crypto/signaturehash"
+	"github.com/goldenrye/dtls/pkg/protocol/alert"
+	"github.com/goldenrye/dtls/pkg/protocol/handshake"
 	"github.com/pion/logging"
 )
 

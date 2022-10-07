@@ -2,9 +2,9 @@
 package handshake
 
 import (
-	"github.com/pion/dtls/v2/internal/ciphersuite/types"
-	"github.com/pion/dtls/v2/internal/util"
-	"github.com/pion/dtls/v2/pkg/protocol"
+	"github.com/goldenrye/dtls/internal/ciphersuite/types"
+	"github.com/goldenrye/dtls/internal/util"
+	"github.com/goldenrye/dtls/pkg/protocol"
 )
 
 // Type is the unique identifier for each handshake message
