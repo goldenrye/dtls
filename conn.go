@@ -321,7 +321,7 @@ func (c *Conn) Read(p []byte) (n int, err error) {
 	}
 }
 
-func (c *Conn) ReadFrom(r Reader) (int, error) {
+func (c *Conn) ReadFrom(r io.Reader) (int64, error) {
 	if c.isConnectionClosed() {
 		return 0, ErrConnClosed
 	}
@@ -336,12 +336,22 @@ func (c *Conn) ReadFrom(r Reader) (int, error) {
 		return 0, errHandshakeInProgress
 	}
 
-    p []byte;
-    m, e := r.Read(p);
-    if m < 0 {
-        panic(errNegativeRead)
-    }
-	return len(p), c.writePackets(c.writeDeadline, []*packet{
+    p := make([]byte, 2000)
+    var err error
+    err = nil
+    for {
+	nr, e := r.Read(p)
+	if e != nil {
+	    err = e
+	    break
+	}
+	if nr > 0 {
+	    new_p := []byte{0xaa, 0xaa, 0xaa, 0xaa}
+	    //new_p := []byte{}
+	    for i:=0; i < nr; i++ {
+		new_p = append(new_p, p[i])
+	    }
+	    c.writePackets(c.writeDeadline, []*packet{
 		{
 			record: &recordlayer.RecordLayer{
 				Header: recordlayer.Header{
@@ -349,13 +359,15 @@ func (c *Conn) ReadFrom(r Reader) (int, error) {
 					Version: protocol.Version1_2,
 				},
 				Content: &protocol.ApplicationData{
-					Data: p,
+					Data: new_p,
 				},
 			},
 			shouldEncrypt: true,
 		},
-	})
-
+	    })
+	}
+    }
+    return int64(0), err
 }
 
 // Write writes len(p) bytes from p to the DTLS connection
