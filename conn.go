@@ -33,6 +33,8 @@ const (
 	defaultReplayProtectionWindow = 64
 )
 
+var Cookie []byte
+
 func invalidKeyingLabels() map[string]bool {
 	return map[string]bool{
 		"client finished": true,
@@ -346,10 +348,14 @@ func (c *Conn) ReadFrom(r io.Reader) (int64, error) {
 	    break
 	}
 	if nr > 0 {
-	    new_p := []byte{0xaa, 0xaa, 0xaa, 0xaa}
-	    //new_p := []byte{}
+	    new_p := []byte{}
+        // prepend the cookie prior to the data packet
+	    for _, v := range Cookie {
+		    new_p = append(new_p, v)
+	    }
+        // add the packet data
 	    for i:=0; i < nr; i++ {
-		new_p = append(new_p, p[i])
+		    new_p = append(new_p, p[i])
 	    }
 	    c.writePackets(c.writeDeadline, []*packet{
 		{
