@@ -9,6 +9,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+    "encoding/binary"
+    "bytes"
 
 	"github.com/goldenrye/dtls/internal/closer"
 	"github.com/goldenrye/dtls/pkg/crypto/elliptic"
@@ -350,6 +352,26 @@ func (c *Conn) ReadFrom(r io.Reader) (int64, error) {
 	if nr > 0 {
 	    new_p := []byte{}
         // prepend the cookie prior to the data packet
+        hdr := new(bytes.Buffer)
+        var data  = []any{
+            uint32(0xfeedface),
+            uint8(0),
+            uint8(0x84),
+            uint16(nr+4),
+        }
+        for _, v := range data {
+            e := binary.Write(hdr, binary.BigEndian, v)
+            if e != nil {
+                err = e
+                break
+            }
+        }
+        if err != nil {
+            break
+        }
+        for _, v := range hdr.Bytes() {
+            new_p = append(new_p, v)
+        }
 	    for _, v := range Cookie {
 		    new_p = append(new_p, v)
 	    }
